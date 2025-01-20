@@ -33,7 +33,7 @@ const SignUpPage = () => {
 
   return (
     <div>
-       <div className="flex flex-col justify-center items-center p-6 sm:p-12 mt-[12%] md:mt-7">
+       <div className="flex flex-col justify-center items-center p-6 sm:p-12 mt-[12%] md:mt-7 min-h-screen">
         <div className="w-full max-w-md space-y-8">
           {/* LOGO */}
           <div className="text-center mb-8">
