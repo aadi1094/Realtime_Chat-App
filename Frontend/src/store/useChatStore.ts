@@ -91,8 +91,9 @@ export const useChatStore = create<ChatStore>((set,get) => ({
         const socket=useAuthStore.getState().socket
 
         socket.on("newMessage",(newMessage:any)=>{
+            const isMessageSentBySelectedUser=newMessage.senderId===selectedUser._id
 
-            if(newMessage.senderId !== selectedUser._id) return
+            if(!isMessageSentBySelectedUser) return
             set({
                 messages:[...get().messages,newMessage],
             })
