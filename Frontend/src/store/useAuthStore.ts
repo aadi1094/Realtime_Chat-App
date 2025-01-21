@@ -4,7 +4,7 @@ import { axiosInstance } from "../lib/axios.ts";
 import toast from "react-hot-toast";
 import {io} from "socket.io-client"
 
-const BASE_URL= import.meta.env.VITE_API_URL
+const BASE_URL= import.meta.env.MODE === 'development' ? 'http://localhost:5001':"/";
 
 type AuthStore = {
     authUser: any | null; // Replace 'any' with the actual type of your user object if available
