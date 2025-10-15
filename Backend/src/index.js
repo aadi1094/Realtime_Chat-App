@@ -10,16 +10,24 @@ import path from "path"
 
 dotenv.config()
 
-const PORT=process.env.PORT
+const PORT=process.env.PORT || 5001
 const __dirname=path.resolve()
 
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials:true,
-    methods:["OPTIONS","OPTION","GET","POST","PUT","DELETE"]
-}))
+// Add these middleware BEFORE your routes
+app.use(express.json());
+app.use(cookieParser()); // This line was missing!
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://chat-app-frontend-hazel-one.vercel.app",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
+
 
 
 app.use("/api/auth",authRoutes)
@@ -29,7 +37,7 @@ if(process.env.NODE_ENV==="production"){
     app.use(express.static(path.join(__dirname,"../Frontend/dist")))
 
     app.get("*",(req,res)=>{
-        res.sendFile(path.join(__dirname,"../Fronend","dist","index.html"))
+        res.sendFile(path.join(__dirname,"../Frontend","dist","index.html"))
     })
 }
 
